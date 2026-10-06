@@ -1,0 +1,142 @@
+/* Diseño limpio sin librerías externas */
+:root {
+  --fondo: #eef1f4;
+  --superficie: #ffffff;
+  --tinta: #1b2a36;
+  --tinta-suave: #5b6b78;
+  --borde: #d5dce2;
+  --acento: #0f6b6b;
+  --acento-oscuro: #0a4f4f;
+  --verde: #1f7a45;
+  --verde-fondo: #dff3e6;
+  --rojo: #b3261e;
+  --rojo-fondo: #fbe3e1;
+  --gris-fondo: #e4e8ec;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--fondo);
+  color: var(--tinta);
+  line-height: 1.5;
+}
+
+h1, h2 { margin: 0; }
+h2 { font-size: 1.1rem; margin-bottom: 1rem; }
+
+/* Header + resumen */
+.header {
+  background: var(--tinta);
+  color: #fff;
+  padding: 1.25rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.header h1 { font-size: 1.5rem; }
+
+.resumen { list-style: none; margin: 0; padding: 0; display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.resumen li {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+}
+.resumen strong { font-size: 1.25rem; margin-right: 0.35rem; }
+.resumen .disponible strong { color: #7fe0a3; }
+.resumen .agotado strong { color: #ff9d94; }
+.resumen .inactivo strong { color: #b9c3cc; }
+
+/* Distribución: formulario a la izquierda, lista a la derecha */
+.contenido {
+  max-width: 1200px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.panel {
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  padding: 1.25rem;
+}
+
+/* Formulario */
+.formulario form { display: flex; flex-direction: column; gap: 0.9rem; }
+.formulario label { display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.85rem; font-weight: 600; }
+.fila { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+
+input, select {
+  font: inherit;
+  font-weight: 400;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--tinta);
+  width: 100%;
+}
+input:focus, select:focus, .btn:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 1px;
+}
+.error { color: var(--rojo); font-size: 0.78rem; font-weight: 400; }
+
+.acciones { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.25rem; }
+
+/* Botones */
+.btn {
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--borde);
+  background: #fff;
+  color: var(--tinta);
+  border-radius: 6px;
+  cursor: pointer;
+}
+.btn:hover { background: var(--gris-fondo); }
+.btn.primario { background: var(--acento); border-color: var(--acento); color: #fff; }
+.btn.primario:hover { background: var(--acento-oscuro); }
+.btn.pequeno { padding: 0.3rem 0.55rem; font-size: 0.72rem; }
+.btn.peligro { color: var(--rojo); border-color: #e7b5b1; }
+.btn.peligro:hover { background: var(--rojo-fondo); }
+
+/* Herramientas de la lista */
+.herramientas { display: grid; grid-template-columns: 1fr auto auto; gap: 0.6rem; margin-bottom: 1rem; }
+.herramientas select { width: auto; }
+
+/* Tabla */
+.tabla-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+th, td { text-align: left; padding: 0.65rem 0.6rem; border-bottom: 1px solid var(--borde); }
+th { font-size: 0.8rem; color: var(--tinta-suave); font-weight: 600; white-space: nowrap; }
+td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.botones { display: flex; gap: 0.35rem; }
+.fila-edicion { background: #e6f2f2; }
+
+/* Etiquetas de estado */
+.etiqueta { padding: 0.15rem 0.6rem; border-radius: 999px; font-size: 0.78rem; font-weight: 600; }
+.etiqueta.disponible { background: var(--verde-fondo); color: var(--verde); }
+.etiqueta.agotado { background: var(--rojo-fondo); color: var(--rojo); }
+.etiqueta.inactivo { background: var(--gris-fondo); color: var(--tinta-suave); }
+
+.vacio { text-align: center; color: var(--tinta-suave); padding: 2rem 0; margin: 0; }
+
+/* Responsive */
+@media (max-width: 860px) {
+  .contenido { grid-template-columns: 1fr; }
+  .herramientas { grid-template-columns: 1fr; }
+  .herramientas select { width: 100%; }
+}
